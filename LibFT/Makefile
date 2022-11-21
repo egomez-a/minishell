@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/08 11:39:06 by juasanto          #+#    #+#              #
-#    Updated: 2022/11/21 14:10:59 by egomez-a         ###   ########.fr        #
+#    Updated: 2022/11/21 14:54:10 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ BONUS = $(addprefix $(LIBDIR), $(BNS))
 OBJS = $(SOURCES:.c=.o)
 BONUS_OBJS = $(BONUS:.c=.o)
 LFLAGS = -I includes/
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 CC = clang
 RM = rm -f
 
