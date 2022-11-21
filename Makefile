@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:46:35 by juasanto          #+#    #+#              #
-#    Updated: 2022/11/17 09:51:04 by egomez-a         ###   ########.fr        #
+#    Updated: 2022/11/21 12:34:13 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,7 @@ fclean: clean
 		$(RM) $(NAME)
 		@make -C $(LIB_DIR) fclean
 		@echo "$(RED)=========== DONE ===========$(RESET)"
-git_push: fclean
+gitpush: fclean
 		@echo "$(RED)========== GIT_PUSH =========="
 		git add *
 		git commit -m "MiniShell - $(NOW)"
