@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:51:25 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/21 13:35:22 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:54:03 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,25 +99,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(main->line);
 		ft_tokenclear(&main->commands, free);
-		// borrar la lista
-		
-		//TODO:Comprobrar PWD con la lista de Eugenio.
-		//		if (chk_dollar_ext(main) == 1)
-		//			printf("Ole que ya funciona\n");
-		// print_list (main->commands);
-
-		// //*************************************************************
-		//He tenido que poner estos print, por que si no me decía que
-		//las variables no se usaban
-		// printf("Matrix para borrar: %s\n", *matrix);
-		//*************************************************************
 	}
-	// ft_free_list(main->envl);
-	// 
-	ft_tokenclear(&main->envl, free);
-	ft_free_list(main->commands);
-	ft_free_list(main->envl);
 	fn_free(main);
-	// system("leaks -q minishell");
+	system("leaks -q minishell");
 	return (0);
 }
