@@ -1,0 +1,46 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Leer_Antes_de_Empezar.txt                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/05/21 21:24:45 by juasanto          #+#    #+#              #
+#    Updated: 2022/06/04 16:12:23 by juasanto         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+Dejamos este fichero aquí para leerlo antes de empezar a currar.
+
+Cosas Pendientes:
+Funciones builtin EGA
+exit - JC, que me lanzas? un t_main?
+export - 
+unset - 
+cd - 
+
+Parseo JC:
+Problemas de Parseo con las comillas.
+
+Comentarios:
+EGA: 
+Ya están los valores de env en una lista t_list *envlist. name y value. 
+Me he basado en tu código despues de intentar otra cosa (gracias!!!)
+Lo único que me salen leaks por todos lados... ya intentaré ,,..ver esto más tarde. 
+
+JC: Creo que ya te he quitado todos los leaks. He estado haciendo funciones
+	free, y de momento con lo que llevamos no hay leaks. Al menos que vea. 
+
+EGA:  GRACIAS CRACK! 
+
+
+
+
+He creado los files para las funciones builtin. 
+pwd - hecha, falta testar
+env - hecha, falta testar
+echo - hecha, pero necesito saber qué me entra. Asumo un **string pero según me comenta Fernando 
+       me entrará una lista enlazada. Cual es? 
+exit - necesito saber en qué formato me llega la información, donde está 
+       exit y donde los términos siguientes. Por ejemplo exit 43 23... donde están estos
+       valores y como me llegan a la función exit?
