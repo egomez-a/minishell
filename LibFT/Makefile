@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/08 11:39:06 by juasanto          #+#    #+#              #
-#    Updated: 2022/11/08 10:55:19 by egomez-a         ###   ########.fr        #
+#    Updated: 2022/11/21 14:10:59 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = ft_putchar.c ft_putnbr.c ft_putstring.c ft_strcpy.c ft_memset.c\
 		ft_strjoin.c  ft_itoa.c ft_putchar_fd.c ft_putnbr_fd.c \
 		ft_putendl_fd.c ft_putstr_fd.c ft_strmapi.c ft_split.c ft_strtrim.c \
 		ft_strjoin_clean.c ft_strrev.c ft_msgerror.c ft_free.c ft_free_array.c \
-		get_next_line.c \
+		get_next_line.c ft_strlen_num.c \
 		ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 		ft_lstadd_back.c ft_lstiter.c ft_matrixlen.c
 

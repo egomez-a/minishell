@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/17 16:00:55 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:31:47 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_main
 	t_list		*envl;
 	t_envel		*envlist;
 	int			control;
+	int			ret;
 	t_func		func[5];
 }				t_main;
 
@@ -162,6 +163,7 @@ int		chk_quote(t_main *main, int cnt);
 ** Check characters 2 (fn_chk2.c)
 */
 
+int		chk_dollar_alone(t_main *main, int cnt);
 int		chk_dollar(t_main *main, int cnt);
 int		chk_all(t_main *main, int cnt);
 int		chk_dollar_ext(t_main *main);

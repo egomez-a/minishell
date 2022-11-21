@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:51:25 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/17 16:32:21 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:35:22 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	main(int argc, char **argv, char **env)
 			if (fn_clean_quotes(main) != 0)
 			{
 				printf("Número impar de quotes\n");
+				main->ret = 1;
 				exit(255); //TODO: Llevar a mensaje de error.
 			}
 			main->tokens = fn_token_list(main);

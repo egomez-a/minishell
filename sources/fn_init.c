@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:32:04 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/17 15:42:39 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:36:16 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_main	*fn_init_main(t_main *main, int argc, char **argv, char **env)
 	main->argv = argv;
 	main->env = env;
 	main->envl = NULL;
+	main->ret = 0;   //variable de retorno 
 	main->exe_commands = NULL;
 	main->control = 0;    //si las variables de entorno estan borradas pasa a ser 1
 	// main->func[0] = (t_func){60, chk_here1(main, 4)};

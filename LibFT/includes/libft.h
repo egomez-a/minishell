@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 13:14:48 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/08 11:05:08 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/21 14:10:27 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char				*ft_strnstr(const char *str1, \
 						const char *str2, size_t len);
 char				*ft_strdup(const char *str);
 int					ft_strlen(const char *str);
+int    				ft_strlen_num(int num);
 char				*ft_strrchr(const char *src, int chr);
 char				*ft_strrev(char *str);
 char				*ft_substr(char const *s, \

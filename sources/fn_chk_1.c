@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 12:19:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/21 10:57:28 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:53:41 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,10 @@ int	chk_quote(t_main *main, int cnt)
 			|| main->line[cnt + 1] != MORE) && cnt < main->lenght_line)
 		{
 			
-			if (main->line[cnt] == S_QUOTE && main->line[cnt + 1] == DOLLAR)
+			if (main->line[cnt - 1] == D_QUOTE && main->line[cnt] == DOLLAR)
 			{	
 				flag = DOLLAR;
 				cnt++;
-				break;
 			}
 			add_one[0] = main->line[cnt];
 			word = ft_strjoin_clean(word, add_one, 1);
