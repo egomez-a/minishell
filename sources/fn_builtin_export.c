@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:14:41 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/09/29 16:06:37 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:09:39 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ int     order_env_matrix(char **matrix, int num)
     int     i;
     int     j;
 
-    mat_ord = matrix;
+    mat_ord = ft_calloc(num, sizeof(char *));
+    i = 0;
+    while (i < num)
+    {
+        mat_ord[i] = ft_strdup(matrix[i]);
+        i++;
+    }
     i = 1;
     while (i < num)
     {
