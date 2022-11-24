@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:24:56 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/21 15:53:40 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/24 16:22:00 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	fn_free(t_main *main)
 	if (main->tokens)
 		fn_free_tokens(main->tokens);
 	if (main->exe_commands)
-		(main->exe_commands);
+		free(main->exe_commands);
 	if (main->commands)
 		ft_tokenclear(&main->commands, free);
 	if (main->envl)
