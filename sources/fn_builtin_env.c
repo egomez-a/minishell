@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:15:56 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/17 10:14:45 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 10:50:36 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	print_envlist(t_list *list)
 	printf("Numero elementos es %d\n", ft_lstsize(list));
 	while (list != NULL)
 	{
-		printf("%d Nombre: %s\n", i, ((t_envel *)list->content)->name);
-		printf("%d Valor :  %s\n", i, ((t_envel *)list->content)->value);
+		printf("%d Nombre: %s\t", i, ((t_envel *)list->content)->name);
+		printf("Valor :  %s\n", ((t_envel *)list->content)->value);
 		i++;
 		list = list->next;
 	}
