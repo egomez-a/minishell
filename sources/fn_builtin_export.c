@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:14:41 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/29 10:58:11 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:43:38 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int     order_env_matrix(char **matrix, int num)
 
     mat_ord = ft_calloc(num, sizeof(char *));
     i = 0;
-    while (i < num)
+    while (matrix[i])
     {
         mat_ord[i] = ft_strdup(matrix[i]);
-        printf("%i     %s\n", i, mat_ord[i]);
         i++;
     }
+    mat_ord[i] = NULL;
     i = 1;
     while (i < num)
     {
@@ -75,7 +75,7 @@ int     order_env_matrix(char **matrix, int num)
     i = 0;
     while (i < num)
     {
-        printf("%d declare -x %s\"\n", i, mat_ord[i]);
+        printf("declare -x %s\"\n", mat_ord[i]);
         i++;
     }
     return (i);
@@ -89,7 +89,7 @@ int    fn_export(t_main *main)
     int     ret;
 
     list = main->envl;
-    num = ft_lstsize(list);
+    num = ft_lstsize(list) - 1;
     temp = env_to_matrix(num, list);
     ret = order_env_matrix(temp, num);
     ft_free_array(temp);

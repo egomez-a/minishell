@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:15:56 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/29 10:50:36 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:45:30 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		fn_env(t_main   *main)
 	t_list	*list;
 
 	list = main->envl;
-    while (list != NULL)
+    while (list != NULL && ((t_envel *)list->content)->name != NULL)
 	{
 		printf("%s", ((t_envel *)list->content)->name);
         printf("=");
