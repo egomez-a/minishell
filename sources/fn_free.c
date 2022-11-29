@@ -6,19 +6,11 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:24:56 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/29 13:19:12 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:39:21 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	fn_free_struct(t_main *stru)
-{
-	if (!stru)
-		return ;
-	free(stru);
-	stru = NULL;
-}
 
 void	fn_lstdelone(t_list *commands, void (*del)(void *))
 {
@@ -67,10 +59,6 @@ void	fn_free_envlist(t_envel *envel)
 
 void	fn_free(t_main *main)
 {
-	if (main->argv)
-		ft_free_array(main->argv);
-	if (main->env)
-		ft_free_array(main->env);
 	if (main->line)
 		free(main->line);
 	if (main->home)
@@ -80,14 +68,15 @@ void	fn_free(t_main *main)
 	if (main->temp_oldpwd)
 		free(main->temp_oldpwd);
 	if (main->commands)
-		ft_tokenclear(&main->commands, free);
+		ft_free_list(main->commands);
 	if (main->tokens)
 		fn_free_tokens(main->tokens);
-	if (main->exe_commands)
-		free(main->exe_commands);
+	// if (main->exe_commands)
+	// 	ft_free_exe(main->exe_commands);
 	if (main->envl)
-		ft_tokenclear(&main->envl, free);
+		ft_free_list(main->envl);
 	if (main->envlist)
 		fn_free_envlist(main->envlist);
-	fn_free_struct(main);
+	if (main)
+		free(main);
 }

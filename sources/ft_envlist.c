@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:22:52 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/29 13:07:43 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:44:29 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ void	ft_env_list(t_main *main, char **env)
 		string = ft_strchr(env[i], '=');
 		envlist = fn_enve_new(env[i], string);
 		ft_lstadd_back(&main->envl, ft_lstnew(envlist));
+		free(envlist->name);
+		free(envlist->value);
+		free(envlist);
 	    i++;
 	}
-	ft_free_enve(envlist);
 	if (main->control == 1)
 		ft_free_array(env);
 }

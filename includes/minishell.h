@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/21 13:31:47 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:26:09 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,9 @@ int		chk_dollar_ext(t_main *main);
 void	fn_free_struct(t_main *stru);
 void	fn_lstdelone(t_list *commands, void (*del)(void *));
 void	ft_tokenclear(t_list **commands, void (*del)(void *));
+void	fn_free_tokens(t_token *tokens);
+void	fn_free_exe(t_exe *exe_commands);
+void	fn_free_envlist(t_envel *envel);
 void	fn_free(t_main *main);
 
 /*

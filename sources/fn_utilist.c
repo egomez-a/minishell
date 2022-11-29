@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 09:48:55 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/17 16:27:06 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:20:54 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ void	ft_free_enve(t_envel *envlist)
 	{
 		envlist->name = NULL;
 		envlist->value = NULL;
+	}
+}
+
+void	ft_free_exe(t_exe *execommands)
+{
+	if (execommands)
+	{
+		execommands->cmd = NULL;
+		ft_free_array(execommands->args);
 	}
 }
 
