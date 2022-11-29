@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:51:25 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/29 11:21:26 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:10:22 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,31 +76,31 @@ int	main(int argc, char **argv, char **env)
 	main = NULL;
 	main = fn_init_main(main, argc, argv, env);
 	ft_env_list(main, env);
-	while (1)
-	{
-		main->line = check_prompt(argc, argv);
-		if (main->line[0] != '\0')
-		{
-			main->lenght_line = ft_strlen(main->line);
-			if (main->line[0] == '9')
-				break;
-			if (fn_clean_quotes(main) != 0)
-			{
-				printf("Número impar de quotes\n");
-				main->ret = 1;
-				exit(255); //TODO: Llevar a mensaje de error.
-			}
-			main->tokens = fn_token_list(main);
-			export_token(main);
-			if (check_builtins(main) == 1)
-				fn_check_word(main->commands, main);
-			else
-				check_first_token(main);
-		}
-		free(main->line);
-		ft_tokenclear(&main->commands, free);
-	}
+	// while (1)
+	// {
+	// 	main->line = check_prompt(argc, argv);
+	// 	if (main->line[0] != '\0')
+	// 	{
+	// 		main->lenght_line = ft_strlen(main->line);
+	// 		if (main->line[0] == '9')
+	// 			break;
+	// 		if (fn_clean_quotes(main) != 0)
+	// 		{
+	// 			printf("Número impar de quotes\n");
+	// 			main->ret = 1;
+	// 			exit(255); //TODO: Llevar a mensaje de error.
+	// 		}
+	// 		main->tokens = fn_token_list(main);
+	// 		export_token(main);
+	// 		if (check_builtins(main) == 1)
+	// 			fn_check_word(main->commands, main);
+	// 		else
+	// 			check_first_token(main);
+	// 	}
+	// 	free(main->line);
+	// 	ft_tokenclear(&main->commands, free);
+	// }
 	fn_free(main);
-	// system("leaks -q minishell");
+	system("leaks -q minishell");
 	return (0);
 }

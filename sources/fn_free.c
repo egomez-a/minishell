@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:24:56 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/24 16:22:00 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:19:12 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,24 @@ void	fn_free_envlist(t_envel *envel)
 
 void	fn_free(t_main *main)
 {
+	if (main->argv)
+		ft_free_array(main->argv);
+	if (main->env)
+		ft_free_array(main->env);
 	if (main->line)
 		free(main->line);
 	if (main->home)
 		free(main->home);
-	// free(main->temp_pwd);
-	// free(main->temp_oldpwd);
+	if (main->temp_pwd)
+		free(main->temp_pwd);
+	if (main->temp_oldpwd)
+		free(main->temp_oldpwd);
+	if (main->commands)
+		ft_tokenclear(&main->commands, free);
 	if (main->tokens)
 		fn_free_tokens(main->tokens);
 	if (main->exe_commands)
 		free(main->exe_commands);
-	if (main->commands)
-		ft_tokenclear(&main->commands, free);
 	if (main->envl)
 		ft_tokenclear(&main->envl, free);
 	if (main->envlist)

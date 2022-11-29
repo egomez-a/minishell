@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:14:41 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/29 12:43:38 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/11/29 12:59:22 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int     order_env_matrix(char **matrix, int num)
         printf("declare -x %s\"\n", mat_ord[i]);
         i++;
     }
+    ft_free_array(mat_ord);
     return (i);
 }
 
