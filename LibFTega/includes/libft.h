@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 12:20:55 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/01 12:04:54 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:47:35 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <stdio.h> 
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
 
 typedef struct		s_list
 {
@@ -68,7 +72,7 @@ char				*ft_strjoin_clean(char *s1, char *s2, int clean);
 char				*ft_strjoin(char const *s1, char const *s2);
 unsigned int		ft_strlcat(char *dest, char *src, unsigned int size);
 unsigned int		ft_strlcpy(char *dest, char *src, unsigned int size);
-int    				ft_strlen_num(int num);
+int					ft_strlen_num(int num);
 size_t				ft_strlen(const char *str);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
