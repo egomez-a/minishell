@@ -6,40 +6,13 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 09:48:55 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/29 15:20:54 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:16:04 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /* Para liberar el contenido de la lista enlazada y evitar los problemas de leaks */
-
-void	ft_free_list(t_list *list)
-{
-	if (list)
-	{
-		ft_free_list(list->next);
-		free(list);
-	}
-}
-
-void	ft_free_enve(t_envel *envlist)
-{
-	if (envlist)
-	{
-		envlist->name = NULL;
-		envlist->value = NULL;
-	}
-}
-
-void	ft_free_exe(t_exe *execommands)
-{
-	if (execommands)
-	{
-		execommands->cmd = NULL;
-		ft_free_array(execommands->args);
-	}
-}
 
 char	**args_list_into_matrix(t_main *main)
 {

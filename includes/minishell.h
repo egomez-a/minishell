@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/29 15:26:09 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:22:40 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,6 @@ void	ft_env_list(t_main *main, char **env);
 **	List Unilities lists and matrix (fn_utilist.c)
 */
 
-void	ft_free_list(t_list *list);
-void	ft_free_enve(t_envel *envlist);
 char	**args_list_into_matrix(t_main *main);
 void	print_list(t_list *list);
 void	first_token_cmd(t_list *list);
@@ -172,13 +170,13 @@ int		chk_dollar_ext(t_main *main);
 ** Clear tokens (fn_free.c)
 */
 
-void	fn_free_struct(t_main *stru);
+void	ft_free_list(t_list *list);
+void	ft_free_enve(t_envel *envlist);
+void	fn_free_exe(t_exe *exe_commands);
 void	fn_lstdelone(t_list *commands, void (*del)(void *));
 void	ft_tokenclear(t_list **commands, void (*del)(void *));
 void	fn_free_tokens(t_token *tokens);
-void	fn_free_exe(t_exe *exe_commands);
-void	fn_free_envlist(t_envel *envel);
-void	fn_free(t_main *main);
+void	ft_freemain(t_main *main);
 
 /*
 ** Execute functions (fn_execute.c)
