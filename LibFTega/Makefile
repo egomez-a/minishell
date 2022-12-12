@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
+#    By: egomez-a <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/08 11:39:06 by egomez-a          #+#    #+#              #
-#    Updated: 2022/12/01 11:41:29 by egomez-a         ###   ########.fr        #
+#    Updated: 2022/12/01 16:50:48 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@
 #objetivo: dependencias
 #		instrucciones.
 
-LIBDIR = src/
+NAME		= libft.a
+SRCS_DIR	= sources/
+OBJ_DIR		= obj/
+INC_DIR		= includes/
+
 SRCS = 	ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
@@ -26,7 +30,6 @@ SRCS = 	ft_atoi.c \
 		ft_islower.c \
 		ft_isdigit.c \
 		ft_isprint.c \
-		ft_isspace.c \
 		ft_isupper.c \
 		ft_isxdigit.c \
 		ft_itoa.c \
@@ -49,7 +52,7 @@ SRCS = 	ft_atoi.c \
 		ft_putchar_fd.c \
 		ft_putchar.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fc.c \
+		ft_putnbr_fd.c \
 		ft_putnbr.c \
 		ft_putstr_fd.c \
 		ft_putstring.c \
@@ -71,27 +74,42 @@ SRCS = 	ft_atoi.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \
-		ft_toupper.c \
-		get_next_line.c
+		ft_toupper.c 
 
-SOURCES = $(addprefix $(LIBDIR), $(SRCS))
-OBJS = $(SOURCES:.c=.o)
-LFLAGS = -I includes/
-CFLAGS = -Wall -Wextra -Werror
-CC = clang
-RM = rm -f
-NAME = libft.a
+SOURCES 	= $(addprefix $(SRCS_DIR), $(SRCS))
+OBJS 		= $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))
+LFLAGS		= -I$(INC_DIR)
+CFLAGS 		= -Wall -Wextra -Werror
+CC 			= gcc
+RM 			= rm -rf
+
+NONE		=	'\033[0m'
+GREEN		=	'\033[32m'
+YELLOW		=	'\033[0;33m'
+BLUE		=	'\033[0;34m'
+PURPLE		=	'\033[0;35m'
 
 all: $(NAME)
 
+$(OBJ_DIR)%.o : $(SRCS_DIR)%.c
+		@mkdir -p $(OBJ_DIR)
+		@$(CC) -c $(CFLAGS) $(LFLAGS) $< -o $@
+
 $(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS)
+	@echo "$(YELLOW)=========== Compilando $(NAME) ==========="
+	$(CC) $(CFLAGS) $(LFLAGS) -o $(NAME) $(OBJS)
+	@echo $(GREEN) "======== COMPILED  ==========" $(NONE)
 
 clean:
-	@$(RM) $(OBJS)
+	@echo $(YELLOW) "========== CLEAN ==========" $(NONE)
+	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS)
+	@echo $(GREEN) "=========== DONE ===========" $(NONE)
 
 fclean: clean
-	@$(RM) $(NAME)
+		@echo $(PURPLE) "========== FCLEAN ==========" $(NONE)
+		$(RM) $(NAME)
+		@echo $(GREEN) "=========== DONE ===========" $(NONE)
 
 re: fclean all
 
