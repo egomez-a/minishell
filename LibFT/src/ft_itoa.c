@@ -3,58 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcsantos <jcsantos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/14 12:26:18 by juasanto          #+#    #+#             */
-/*   Updated: 2021/03/13 11:44:13 by jcsantos         ###   ########.fr       */
+/*   Created: 2021/01/29 18:44:09 by egomez-a          #+#    #+#             */
+/*   Updated: 2022/12/12 10:52:25 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int	cnt_char(long int n)
+static int	ft_nblen(long nb)
 {
-	long int	i;
+	int	len;
 
-	i = 0;
-	if (n < 0)
+	len = 0;
+	if (nb < 0)
 	{
-		i++;
-		n = n * -1;
+		nb = nb * -1;
+		len = 1;
 	}
-	while (n >= 10)
+	while (nb > 0)
 	{
-		n = n / 10;
-		i++;
+		nb = nb / 10;
+		len++;
 	}
-	return (i + 1);
+	return (len);
+}
+
+char	*check_number(int n)
+{
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	if (n == 0)
+		return (ft_strdup("0"));
+	else
+		return (NULL);
 }
 
 char	*ft_itoa(int n)
 {
-	char			*dest;
-	int				len;
-	unsigned int	tmp;
-	int				cnt;
+	char	*str;
+	int		len;
 
-	if (n < 0)
-		tmp = -n;
-	else
-		tmp = n;
-	len = cnt_char(n);
-	dest = malloc(len + 1 * sizeof(char));
-	if (!dest)
+	if (n == 0 || n == -2147483648)
+		return (check_number(n));
+	len = ft_nblen(n);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
+	str[len--] = '\0';
+	if (n == 0)
+		str[0] = '0';
 	if (n < 0)
-		dest[0] = '-';
-	cnt = len - 1;
-	while (tmp >= 10)
 	{
-		dest[cnt] = tmp % 10 + 48;
-		tmp /= 10;
-		cnt--;
+		str[0] = '-';
+		n = n * (-1);
 	}
-	dest[cnt] = tmp % 10 + 48;
-	dest[len] = '\0';
-	return (dest);
+	while (n > 0)
+	{
+		str[len] = '0' + (n % 10);
+		n = n / 10;
+		len--;
+	}
+	return (str);
 }

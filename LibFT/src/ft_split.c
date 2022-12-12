@@ -3,80 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juasanto <juasanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/23 09:12:23 by juasanto          #+#    #+#             */
-/*   Updated: 2021/03/15 11:41:06 by juasanto         ###   ########.fr       */
+/*   Created: 2021/01/29 12:26:45 by egomez-a          #+#    #+#             */
+/*   Updated: 2022/12/12 11:28:32 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static	int	count_word(char const *str, char chr)
+static int	ft_countwords(char const *s, char c)
 {
-	int		swtch;
-	int		cnt;
+	unsigned int	i;
+	int				cntr;
 
-	swtch = 0;
-	cnt = 0;
-	while (*str != 0)
+	if (!s || s[0] == 0)
+		return (0);
+	i = 0;
+	cntr = 0;
+	while (s[i])
 	{
-		if (swtch == 1 && *str == chr)
-			swtch = 0;
-		if (swtch == 0 && *str != chr)
-		{
-			swtch = 1;
-			cnt++;
-		}
-		str++;
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
+			cntr++;
+		while (s[i] && (s[i] != c))
+			i++;
 	}
-	return (cnt);
+	return (cntr);
 }
 
-int	cnt_pnt_yes(int *cnt_pnt, const char *s, char c)
+static char	**ft_malloc(char const *s, char c)
 {
-	int	cnt_tmp;
+	int			len;
+	char		**tab;
 
-	cnt_tmp = *cnt_pnt;
-	while (s[cnt_tmp] == c && s[cnt_tmp] != 0)
-		cnt_tmp++;
-	return (cnt_tmp);
+	len = ft_countwords(s, c);
+	tab = malloc(sizeof(*tab) * (len + 1));
+	if (tab == 0)
+		return (0);
+	return (tab);
 }
 
-int	cnt_pnt_no(int *cnt_pnt, const char *s, char c)
+static int	ft_wordcountnext(char const *s, char c, int i)
 {
-	int	cnt_tmp;
+	int	cntr;
 
-	cnt_tmp = *cnt_pnt;
-	while (s[cnt_tmp] != c && s[cnt_tmp] != 0)
-		cnt_tmp++;
-	return (cnt_tmp);
+	cntr = 0;
+	while (s[i] == c && s[i] != '\0')
+		i++;
+	while (s[i] != '\0' && s[i] != c)
+	{
+		cntr++;
+		i++;
+	}
+	return (cntr);
+}
+
+static char	**ft_freesplit(char **tab, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i && tab[j] != 0)
+	{
+		free(tab[j]);
+		j++;
+	}
+	free(tab);
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		split_num;
-	char	**split_array;
+	int		i;
 	int		start;
-	int		cnt_pnt;
-	int		cnt_array;
+	int		j;
+	char	**tab;
 
-	cnt_pnt = 0;
-	cnt_array = -1;
-	if (!s || !c)
+	i = -1;
+	start = 0;
+	if (s == NULL)
 		return (NULL);
-	split_num = count_word(s, c);
-	split_array = (char **)ft_calloc(sizeof(char *), split_num + 1);
-	if (!split_array)
+	tab = ft_malloc(s, c);
+	if (!tab)
 		return (NULL);
-	while (++cnt_array < split_num)
+	while (++i < ft_countwords(s, c))
 	{
-		cnt_pnt = cnt_pnt_yes(&cnt_pnt, s, c);
-		start = cnt_pnt;
-		cnt_pnt = cnt_pnt_no(&cnt_pnt, s, c);
-		split_array[cnt_array] = ft_substr(s, start, cnt_pnt - start);
-		cnt_pnt++;
+		j = 0;
+		tab[i] = malloc(ft_wordcountnext(s, c, start) + 1);
+		if (!tab[i])
+			return (ft_freesplit(tab, i));
+		while (s[start] != '\0' && s[start] == c)
+			start++;
+		while (s[start] != '\0' && s[start] != c)
+			tab[i][j++] = s[start++];
+		tab[i][j] = '\0';
 	}
-	split_array[cnt_array] = 0;
-	return (split_array);
+	tab[i] = 0;
+	return (tab);
 }

@@ -3,38 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juasanto <juasanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/07 09:58:48 by juasanto          #+#    #+#             */
-/*   Updated: 2021/03/08 13:10:49 by juasanto         ###   ########.fr       */
+/*   Created: 2021/01/22 16:04:58 by egomez-a          #+#    #+#             */
+/*   Updated: 2022/12/12 10:06:42 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	*ft_memmove(void *str_ds, const void *str_src, size_t num_c)
-{
-	int	cnt;
+/*
+** Esta función copia len bytes de src a dst. Las dos strings se pueden super-
+** poner. La copia se hace de manera no destructiva.
+** Añadimos el caso de que dst y src sean nulos pero len no.
+*/
 
-	if ((!str_ds && !str_src) || num_c == 0)
-		return (str_ds);
-	if (str_ds > str_src)
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t	i;
+
+	if ((dst == 0) && (src == 0) && (len > 0))
+		return (NULL);
+	if (src < dst)
 	{
-		cnt = (int)num_c - 1;
-		while (cnt >= 0)
+		i = len;
+		while (i > 0)
 		{
-			*(char *)(str_ds + cnt) = *(char *)(str_src + cnt);
-			cnt--;
+			i--;
+			((char *)dst)[i] = ((char *)src)[i];
 		}
 	}
 	else
 	{
-		cnt = 0;
-		while (cnt < (int)num_c)
+		i = 0;
+		while (i < len)
 		{
-			*(char *)(str_ds + cnt) = *(char *)(str_src + cnt);
-			cnt++;
+			((char *)dst)[i] = ((char *)src)[i];
+			i++;
 		}
 	}
-	return (str_ds);
+	return (dst);
 }

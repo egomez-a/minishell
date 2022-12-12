@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juasanto <juasanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/01 12:43:22 by juasanto          #+#    #+#             */
-/*   Updated: 2021/03/08 13:10:31 by juasanto         ###   ########.fr       */
+/*   Created: 2021/01/22 16:04:30 by egomez-a          #+#    #+#             */
+/*   Updated: 2022/12/12 10:06:55 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	*ft_memcpy(void *str_dst, const void *str_src, size_t str_leng)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*temp_pointer_dest;
-	unsigned char	*temp_pointer_src;
+	size_t	i;
+	char	*d;
+	char	*s;
 
-	temp_pointer_dest = (unsigned char *)str_dst;
-	temp_pointer_src = (unsigned char *)str_src;
-	if (!temp_pointer_dest && !temp_pointer_src)
+	i = 0;
+	d = (char *)dst;
+	s = (char *)src;
+	if (src == NULL && dst == NULL)
 		return (NULL);
-	while (str_leng-- != 0)
-		*temp_pointer_dest++ = *temp_pointer_src++;
-	return (str_dst);
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
 }

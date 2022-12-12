@@ -3,27 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juasanto <juasanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/13 16:59:03 by jcsantos          #+#    #+#             */
-/*   Updated: 2021/03/08 13:13:01 by juasanto         ###   ########.fr       */
+/*   Created: 2021/01/22 16:23:36 by egomez-a          #+#    #+#             */
+/*   Updated: 2022/12/01 11:46:48 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-char	*ft_strnstr(const char *str1, const char *str2, size_t len)
-{
-	int	size_str2;
+/*
+** The strnstr() function locates the first occurrence of the null-terminated
+** string needle in the string haystack, where not more than len characters are
+** searched.  Characters that appear after a `\0' character are not searched.
+** Return Values: If needle is an empty string, haystack is returned; if needle
+** occurs nowhere in haystack, NULL is returned; otherwise a pointer to the
+** first character of the first occurrence of needle is returned.
+*/
 
-	if (*str2 == '\0')
-		return ((char *)str1);
-	size_str2 = ft_strlen((char *)str2);
-	while (*str1 && size_str2 <= (int)len--)
+char	*ft_strnstr(const char *hst, const char *ndl, size_t len)
+{
+	unsigned int		i;
+	unsigned int		j;
+
+	if (ndl[0] == '\0')
+		return ((char *)hst);
+	i = 0;
+	while (hst[i] && i < len)
 	{
-		if (ft_strncmp(str1, str2, size_str2) == 0)
-			return ((char *)str1);
-		str1++;
+		j = 0;
+		if (hst[i] == ndl[j])
+		{
+			while (i + j < len && hst[i + j] == ndl[j])
+			{
+				j++;
+				if (!ndl[j])
+					return ((char *)&hst[i]);
+			}
+		}
+		i++;
 	}
-	return (NULL);
+	return (0);
 }

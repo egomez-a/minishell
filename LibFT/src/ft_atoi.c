@@ -3,39 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juasanto <juasanto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/13 19:08:02 by jcsantos          #+#    #+#             */
-/*   Updated: 2022/04/14 11:28:37 by juasanto         ###   ########.fr       */
+/*   Created: 2021/01/22 11:41:48 by egomez-a          #+#    #+#             */
+/*   Updated: 2022/12/12 10:03:42 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-long long int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
-	int						sign;
-	long long int			result;
+	int	signo;
+	int	n;
 
-	result = 0;
-	sign = 0;
-	while (ft_isspace(*str))
+	n = 0;
+	signo = 1;
+	while ((*str == ' ') || ((*str >= 9) && (*str <= 13)))
 		str++;
-	if (*str == '-')
-		sign = 1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (ft_isdigit((int)*str))
+	if ((*str == '-') || (*str == '+'))
 	{
-		if (result < 9223372036854775807)
-		{
-			result = result * 10 + *str - '0';
-			str++;
-		}
-		else
-			return ((sign - 1) * 1);
+		if (*str == '-')
+			signo = -1;
+		str++;
 	}
-	if (sign == 1)
-		return (-result);
-	return (result);
+	if ((*str == '-') || (*str == '+'))
+		return (0);
+	while ((*str >= '0') && (*str <= '9'))
+	{
+		n = n * 10;
+		n = n + (int)(*str - 48);
+		str++;
+	}
+	n = n * signo;
+	return (n);
 }
