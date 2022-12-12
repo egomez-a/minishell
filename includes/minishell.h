@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/12 13:16:14 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:24:21 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define LESS 60
 # define MORE 62
 # define DOLLAR 36
+# define DOLENC 366
 # define CMD 300
 # define ARG 288
 # define HERE 388

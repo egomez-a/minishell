@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/12 18:06:42 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:48:28 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,18 @@ int	fn_echo(t_main *main)
 		{
 			args[i] = ((t_token *)tokens->content)->word;
 			ft_putstr_fd(args[i], 1);
-			write (1, " ", 1);
+			if (((t_token *)tokens->next->content)->type != DOLENC)
+				write (1, " ", 1);
 		}
-		else if (((t_token *)tokens->content)->type == DOLLAR)
+		else if (((t_token *)tokens->content)->type == DOLLAR
+			|| ((t_token *)tokens->content)->type == DOLENC)
 		{
 			args[i] = (((t_token *)tokens->content)->word);
 			((t_token *)tokens->content)->extvar = checkenvdollar(args[i], main);
 			args[i] = ((t_token *)tokens->content)->extvar;
 			ft_putstr_fd(args[i], 1);
-			if (ft_strcmp(((t_token *)tokens->content)->word, " ") != 0)
+			if (((t_token *)tokens->content)->type == DOLLAR
+				|| ft_strcmp(((t_token *)tokens->content)->word, " ") != 0)
 				write (1, " ", 1);
 		}
 		i++;

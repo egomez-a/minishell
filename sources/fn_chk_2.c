@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:33:01 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/12 17:12:48 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:30:44 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,15 @@ int	chk_dollar(t_main *main, int cnt)
 	char		add_one[2];
 	int 		flag;
 
-	flag = DOLLAR;
+	flag = DOLENC;
 	word = ft_strdup("");
 	add_one[1] = 0;
 	if (main->line[cnt] == DOLLAR)
 	{
 		if (main->line[cnt - 1] && main->line[cnt - 1] == SPACE)
 		{
-			new_token = fn_token_new(" ", DOLLAR, 0, 0);
+			flag = DOLLAR;
+			new_token = fn_token_new(" ", flag, 0, 0);
 			ft_lstadd_back(&main->commands, ft_lstnew(new_token));
 		}
 		cnt++;
@@ -81,9 +82,9 @@ int	chk_dollar(t_main *main, int cnt)
 		}
 		if (chk_dollar_alone(main, cnt) == 0)
 			return (cnt);
-		if (chk_dollar_question(main,cnt) == cnt + 1)
+		if (chk_dollar_question(main, cnt) == cnt + 1)
 			return (cnt + 1);
-		while ((main->line[cnt] != DOLLAR) && (main->line[cnt + 1] != SPACE 
+		while ((main->line[cnt] != DOLLAR) && (main->line[cnt + 1] != SPACE
 				|| main->line[cnt + 1] != DQU || main->line[cnt + 1] != SQU
 				|| main->line[cnt + 1] != PIPE || main->line[cnt + 1] != LESS
 				|| main->line[cnt + 1] != MORE) && cnt < main->lenght_line)
@@ -91,7 +92,7 @@ int	chk_dollar(t_main *main, int cnt)
 			add_one[0] = main->line[cnt];
 			word = ft_strjoin_clean(word, add_one, 1);
 			cnt++;
-			if (main->line[cnt] == DOLLAR || main->line[cnt] == SPACE 
+			if (main->line[cnt] == DOLLAR || main->line[cnt] == SPACE
 				|| main->line[cnt] == DQU || main->line[cnt] == SQU
 				|| main->line[cnt] == PIPE || main->line[cnt] == LESS
 				|| main->line[cnt] == MORE)
