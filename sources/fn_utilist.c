@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 09:48:55 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/01 10:16:04 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:14:48 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	print_list(t_list *list)
 
 void	first_token_cmd(t_list *list)
 {
-	if ((((t_token *)list->content)->type) != RD ||
-		(((t_token *)list->content)->type) != APPEND ||
-		(((t_token *)list->content)->type) != HERE)
+	if ((((t_token *)list->content)->type) != RD
+		|| (((t_token *)list->content)->type) != APPEND
+		|| (((t_token *)list->content)->type) != HERE)
 	{
 		(((t_token *)list->content)->type) = CMD;
 	}

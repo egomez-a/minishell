@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/17 17:09:33 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:06:42 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	number_of_arguments(char **args)
 	return (n);
 }
 
-int			flag_treatment(char **args)
+int	flag_treatment(char **args)
 {
 	int	i;
 	int	j;
@@ -87,7 +87,7 @@ char		*checkenvdollar(char *vardollar, t_main *main)
 	return (aux);	
 }
 
-int			fn_echo(t_main *main)
+int	fn_echo(t_main *main)
 {
 	int		i;
 	int		n_flag;
@@ -100,24 +100,27 @@ int			fn_echo(t_main *main)
 	tokens = (t_list *)main->commands;
 	while (tokens != NULL)
 	{
-		if (((t_token *)tokens->content)->type == ARG)
+		if (((t_token *)tokens->content)->type == CMD)
+		{
+			args[i] = NULL;
+		}
+		else if (((t_token *)tokens->content)->type == ARG)
+		{
 			args[i] = ((t_token *)tokens->content)->word;
+			ft_putstr_fd(args[i], 1);
+			write (1, " ", 1);
+		}
 		else if (((t_token *)tokens->content)->type == DOLLAR)
 		{
 			args[i] = (((t_token *)tokens->content)->word);
 			((t_token *)tokens->content)->extvar = checkenvdollar(args[i], main);
 			args[i] = ((t_token *)tokens->content)->extvar;
+			ft_putstr_fd(args[i], 1);
+			if (ft_strcmp(((t_token *)tokens->content)->word, " ") != 0)
+				write (1, " ", 1);
 		}
-		ft_putstr_fd(args[i], 1);
 		i++;
-		if (((t_token *)tokens->content)->type == CMD)
-			tokens = tokens->next;
-		else 
-		{	
-			tokens = tokens->next;
-			if ((tokens != NULL) && ((t_token *)tokens->content)->type != DOLLAR)
-			write(1, " ", 1);
-		}
+		tokens = tokens->next;
 	}
 	n_flag = flag_treatment(args);
 	if (n_flag == 0)

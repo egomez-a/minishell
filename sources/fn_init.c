@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:32:04 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/21 13:36:16 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:16:41 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		fn_clean_quotes(t_main *main)
 	find_quote = 0;
 	while (++cnt < main->lenght_line)
 	{
-		if ((main->line[cnt] == D_QUOTE || main->line[cnt] == S_QUOTE) && \
+		if ((main->line[cnt] == DQU || main->line[cnt] == SQU) && \
 				find_quote == 0)
 		{
 			tmp_quote = (int)main->line[cnt];
@@ -72,7 +72,7 @@ int		fn_clean_quotes(t_main *main)
 char	*check_prompt(int argc, char **argv)
 {
 	char	*prompt;
-	
+
 	(void)argc;
 	(void)argv;
 	prompt = readline("\033[36mprompt:\\ (Salimos con 9)> \033[0m");

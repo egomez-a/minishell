@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:24:56 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/01 11:15:06 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:19:45 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	ft_tokenclear(t_list **commands, void (*del)(void *))
 void	ft_free_tokens(t_token *tokens)
 {
 	if (!tokens->extvar)
-		return;
-	ft_free_array(&tokens->extvar);	
+		return ;
+	ft_free_array(&tokens->extvar);
 }
 
 void	ft_freemain(t_main *main)

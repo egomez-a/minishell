@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:01:44 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/17 11:16:21 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:20:05 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	check_builtins(t_main *main)
 
 void	fn_check_word(t_list *list, t_main *main)
 {
-	int ret;
-	
+	int	ret;
+
 	if (ft_strcmp((((t_token *)list->content)->word), "pwd") == 0)
 		ret = fn_pwd();
 	else if (ft_strcmp((((t_token *)list->content)->word), "env") == 0)

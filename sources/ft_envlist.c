@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:22:52 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/01 11:13:50 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:13:26 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ t_envel	*fn_enve_new(char *envi, char *string)
 
 	temp = ft_calloc(sizeof(t_envel), 1);
 	temp->value = ft_strtrim(string, "=");
-	temp->name = ft_substr(envi, 0, (ft_strlen(envi) - ft_strlen(temp->value) - 1));
+	temp->name = ft_substr(envi, 0, (ft_strlen(envi) - ft_strlen(temp->value)
+				- 1));
 	return (temp);
 }
 
 char	**fn_myenv(void)
 {
 	char	cwd[1024];
-	char 	**temp;
-	
+	char	**temp;
+
 	temp = ft_calloc(3, sizeof(char *));
 	temp[0] = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
 	temp[1] = ft_strdup("SHLVL=1");

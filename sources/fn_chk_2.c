@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:33:01 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/24 16:28:51 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:12:48 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	chk_all(t_main *main, int cnt)
 {
 	return (main->line[cnt] == PIPE || main->line[cnt] == LESS || \
-		main->line[cnt] == MORE || main->line[cnt] == D_QUOTE || \
-		main->line[cnt] == S_QUOTE || main->line[cnt] == DOLLAR);
+		main->line[cnt] == MORE || main->line[cnt] == DQU || \
+		main->line[cnt] == SQU || main->line[cnt] == DOLLAR);
 }
 
 int	chk_dollar_question(t_main *main, int cnt)
 {
 	t_token		*new_token;
-	
+
 	if (main->line[cnt] == '?' && (main->line[cnt + 1] == SPACE
 			|| main->line[cnt + 1] == '\0'))
 	{
@@ -66,35 +66,36 @@ int	chk_dollar(t_main *main, int cnt)
 	word = ft_strdup("");
 	add_one[1] = 0;
 	if (main->line[cnt] == DOLLAR)
-	{ 
+	{
 		if (main->line[cnt - 1] && main->line[cnt - 1] == SPACE)
 		{
-			new_token = fn_token_new(" ", ARG, 0, 0);
+			new_token = fn_token_new(" ", DOLLAR, 0, 0);
 			ft_lstadd_back(&main->commands, ft_lstnew(new_token));
 		}
 		cnt++;
-		if (main->line[cnt] == D_QUOTE || main->line[cnt] == S_QUOTE || (main->line[cnt] >= '0' && main->line[cnt] <= '9'))
+		if (main->line[cnt] == DQU || main->line[cnt] == SQU
+			|| (main->line[cnt] >= '0' && main->line[cnt] <= '9'))
 		{
 			cnt++;
-			flag = ARG;		
+			flag = ARG;
 		}
 		if (chk_dollar_alone(main, cnt) == 0)
 			return (cnt);
 		if (chk_dollar_question(main,cnt) == cnt + 1)
 			return (cnt + 1);
 		while ((main->line[cnt] != DOLLAR) && (main->line[cnt + 1] != SPACE 
-			|| main->line[cnt + 1] != D_QUOTE || main->line[cnt + 1] != S_QUOTE 
-			|| main->line[cnt + 1] != PIPE || main->line[cnt + 1] != LESS
-			|| main->line[cnt + 1] != MORE) && cnt < main->lenght_line)
+				|| main->line[cnt + 1] != DQU || main->line[cnt + 1] != SQU
+				|| main->line[cnt + 1] != PIPE || main->line[cnt + 1] != LESS
+				|| main->line[cnt + 1] != MORE) && cnt < main->lenght_line)
 		{
 			add_one[0] = main->line[cnt];
 			word = ft_strjoin_clean(word, add_one, 1);
 			cnt++;
 			if (main->line[cnt] == DOLLAR || main->line[cnt] == SPACE 
-			|| main->line[cnt] == D_QUOTE || main->line[cnt] == S_QUOTE 
-			|| main->line[cnt] == PIPE || main->line[cnt] == LESS
-			|| main->line[cnt] == MORE)
-				break;
+				|| main->line[cnt] == DQU || main->line[cnt] == SQU
+				|| main->line[cnt] == PIPE || main->line[cnt] == LESS
+				|| main->line[cnt] == MORE)
+				break ;
 		}
 		new_token = fn_token_new(word, flag, 0, 0);
 		ft_lstadd_back(&main->commands, ft_lstnew(new_token));
@@ -114,12 +115,12 @@ int	chk_dollar_ext(t_main *main)
 	ext = 0;
 	tmp_token = main->commands;
 	tmp_env = main->envl;
-	while(tmp_token != NULL)
+	while (tmp_token != NULL)
 	{
 		if (((t_token *)tmp_token->content)->type == DOLLAR)
 		{
 			tmp_token = tmp_token->next;
-			while(tmp_env != NULL)
+			while (tmp_env != NULL)
 			{
 				if (ft_strcmp(((t_token *)tmp_token->content)->word, \
 					((t_envel *)tmp_env->content)->name) == 0)
@@ -130,5 +131,5 @@ int	chk_dollar_ext(t_main *main)
 		}
 		tmp_token = tmp_token->next;
 	}
-	return(ext);
+	return (ext);
 }

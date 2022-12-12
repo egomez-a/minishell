@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 13:12:44 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/17 16:16:31 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:14:50 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int		word_nam(t_main *main, int type, int separator, int cnt)
 	word = ft_strdup("");
 	while (main->line[cnt] != separator && cnt < main->lenght_line)
 	{
-		if ((main->line[cnt] == D_QUOTE || main->line[cnt] == S_QUOTE) &&
-				main->line[cnt - 1] != SPACE)
+		if ((main->line[cnt] == DQU || main->line[cnt] == SQU)
+			&& main->line[cnt - 1] != SPACE)
 		{
 			end_quo++;
 			cnt++;
 		}
-		if (end_quo == 2 || (chk_all(main, cnt) == 1 && \
-			(separator != D_QUOTE && separator != S_QUOTE)))
+		if (end_quo == 2 || (chk_all(main, cnt) == 1
+				&& (separator != DQU && separator != SQU)))
 			break ;
 		add_one[0] = main->line[cnt];
 		word = ft_strjoin_clean(word, add_one, 1);
@@ -62,12 +62,11 @@ int		word_nam(t_main *main, int type, int separator, int cnt)
 	return (cnt - cnt1);
 }
 
-//TODO:  Problemas con el check de las Quotes
 t_token	*fn_token_list(t_main *main)
 {
-	int			cnt;
-	int 		type;
-	 
+	int		cnt;
+	int		type;
+
 	cnt = 0;
 	type = ARG;
 	// printf("Line: %s\n", main->line);

@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 12:19:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/11/21 12:53:41 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:23:33 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,6 @@ int	chk_pipe(t_main *main, int cnt)
 	return (cnt);
 }
 
-//TODO: echo "tu pu"ta ma"dre" es" muy fea" no funciona. Problema con los
-// comillas, las separa en varios tokens
-
-// Si encuentro una comilla, me voy a una función de quotes que va a hacer:
-// Lo primero ver si el caracter anterior es un texto. Si lo es, la ignora.
-// si el caracter anterior es un espacio, lo que viene después es un texto hasta
-// la comilla siguiente. 
-// Además si hay dentro de este texto el signo $ significa variable que hay que 
-// expandir 
 int	chk_quote(t_main *main, int cnt)
 {
 	t_token		*new_token;
@@ -85,17 +76,16 @@ int	chk_quote(t_main *main, int cnt)
 	flag = ARG;
 	word = ft_strdup("");
 	add_one[1] = 0;
-	if (main->line[cnt] == D_QUOTE || main->line[cnt] == S_QUOTE)
+	if (main->line[cnt] == DQU || main->line[cnt] == SQU)
 	{
 		tmp_quote = (int)main->line[cnt];
 		cnt++;
-		while ((main->line[cnt] != tmp_quote) && (main->line[cnt + 1] != SPACE 
-			|| main->line[cnt + 1] != D_QUOTE || main->line[cnt + 1] != S_QUOTE 
-			|| main->line[cnt + 1] != PIPE || main->line[cnt + 1] != LESS
-			|| main->line[cnt + 1] != MORE) && cnt < main->lenght_line)
+		while ((main->line[cnt] != tmp_quote) && (main->line[cnt + 1] != SPACE
+				|| main->line[cnt + 1] != DQU || main->line[cnt + 1] != SQU
+				|| main->line[cnt + 1] != PIPE || main->line[cnt + 1] != LESS
+				|| main->line[cnt + 1] != MORE) && cnt < main->lenght_line)
 		{
-			
-			if (main->line[cnt - 1] == D_QUOTE && main->line[cnt] == DOLLAR)
+			if (main->line[cnt - 1] == DQU && main->line[cnt] == DOLLAR)
 			{	
 				flag = DOLLAR;
 				cnt++;
@@ -103,10 +93,10 @@ int	chk_quote(t_main *main, int cnt)
 			add_one[0] = main->line[cnt];
 			word = ft_strjoin_clean(word, add_one, 1);
 			cnt++;
-			if ((main->line[cnt] == tmp_quote) && (main->line[cnt + 1] != SPACE 
-			|| main->line[cnt + 1] != D_QUOTE || main->line[cnt + 1] != S_QUOTE 
-			|| main->line[cnt + 1] != PIPE || main->line[cnt + 1] != LESS
-			|| main->line[cnt + 1] != MORE))
+			if ((main->line[cnt] == tmp_quote) && (main->line[cnt + 1] != SPACE
+					|| main->line[cnt + 1] != DQU || main->line[cnt + 1] != SQU
+					|| main->line[cnt + 1] != PIPE || main->line[cnt + 1] != LESS
+					|| main->line[cnt + 1] != MORE))
 				cnt++;
 		}
 		new_token = fn_token_new(word, flag, 0, 0);

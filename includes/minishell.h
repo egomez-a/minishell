@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/01 10:22:40 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:16:14 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 */
 
 # define SPACE 32
-# define D_QUOTE 34
-# define S_QUOTE 39
+# define DQU 34
+# define SQU 39
 # define PIPE 124
 # define LESS 60
 # define MORE 62
@@ -44,7 +44,7 @@
 # define RD 588
 
 /*
-** Funcion como structura
+** Funcion como structure
 */
 struct		s_main;
 
