@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/12 18:48:28 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:15:55 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,14 @@ int	fn_echo(t_main *main)
 	while (tokens != NULL)
 	{
 		if (((t_token *)tokens->content)->type == CMD)
-		{
 			args[i] = NULL;
-		}
 		else if (((t_token *)tokens->content)->type == ARG)
 		{
 			args[i] = ((t_token *)tokens->content)->word;
 			ft_putstr_fd(args[i], 1);
-			if (((t_token *)tokens->next->content)->type != DOLENC)
+			if ((t_token *)tokens->next != NULL &&
+				(((t_token *)tokens->next->content)->type != DOLENC
+					|| ((t_token *)tokens->next->content)->type != DOLLAR))
 				write (1, " ", 1);
 		}
 		else if (((t_token *)tokens->content)->type == DOLLAR
@@ -118,8 +118,7 @@ int	fn_echo(t_main *main)
 			((t_token *)tokens->content)->extvar = checkenvdollar(args[i], main);
 			args[i] = ((t_token *)tokens->content)->extvar;
 			ft_putstr_fd(args[i], 1);
-			if (((t_token *)tokens->content)->type == DOLLAR
-				|| ft_strcmp(((t_token *)tokens->content)->word, " ") != 0)
+			if (ft_strcmp(((t_token *)tokens->content)->word, " ") != 0 || ((t_token *)tokens->content)->type != DOLENC)
 				write (1, " ", 1);
 		}
 		i++;
