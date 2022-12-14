@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 12:22:52 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/12 13:13:26 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:00:31 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,3 @@ void	ft_env_list(t_main *main, char **env)
 	if (main->control == 1)
 		ft_free_array(env);
 }
-
