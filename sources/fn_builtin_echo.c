@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/12 19:15:55 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:56:32 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,50 @@
 
 static int	number_of_arguments(char **args)
 {
-	int		n;
+	int		i;
 
-	n = 0;
-	while (args[n])
-		n++;
-	return (n);
+	i = 0;
+	while (args[i])
+	{
+		printf("args %d  --- %s\n", i, args[i]);
+		i++;
+	}
+	return (i);
 }
 
+/* 
+** he usado chatgpt para optimizar mi función, y en efecto la hace más concisa 
+** y legible.
+*/
+
 int	flag_treatment(char **args)
+{
+	int	num_args;
+	int	i;
+	int	j;
+	int	n_flag;
+
+	num_args = number_of_arguments(args);
+	if (num_args == 0 || !args || !args[0])
+		return (-1);
+	i = 0;
+	n_flag = 0;
+	while (i < num_args)
+	{
+		if (args[i] && args[i][0] == '-' && args[i][1] == 'n')
+		{
+			j = 2;
+			while (args[i][j] == 'n')
+				j++;
+			if (args[i][j] == '\0' || args[i][j] == ' ')
+				n_flag++;
+		}
+		i++;
+	}
+	return (n_flag);
+}
+
+int	flag_treatment2(char **args)
 {
 	int	i;
 	int	j;
@@ -100,6 +135,7 @@ int	fn_echo(t_main *main)
 	tokens = (t_list *)main->commands;
 	while (tokens != NULL)
 	{
+		n_flag = flag_treatment(args);
 		if (((t_token *)tokens->content)->type == CMD)
 			args[i] = NULL;
 		else if (((t_token *)tokens->content)->type == ARG)
@@ -124,7 +160,6 @@ int	fn_echo(t_main *main)
 		i++;
 		tokens = tokens->next;
 	}
-	n_flag = flag_treatment(args);
 	if (n_flag == 0)
 		write(1, "\n", 1);
 	return (0);
