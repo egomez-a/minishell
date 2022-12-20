@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/20 15:18:20 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:21:01 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int	fn_echo(t_main *main)
 			ft_putstr_fd(args[i], 1);
 			if (ft_strcmp(((t_token *)tokens->content)->word, " ") != 0)
 				write (1, " ", 1);
+			i++;
 		}
-		i++;
 		tokens = tokens->next;
 	}
 	if (n_flag == 0)
