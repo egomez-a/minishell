@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:46:35 by juasanto          #+#    #+#              #
-#    Updated: 2022/12/14 17:26:55 by egomez-a         ###   ########.fr        #
+#    Updated: 2022/12/20 10:59:39 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ all: $(NAME)
 $(OBJ_DIR)%.o : $(SRCS_DIR)%.c
 #		echo Create: $(NAME) Object directory
 		@mkdir -p $(OBJ_DIR)
-		@$(CC) -c $(DEBUGGING) $(LFLAGS) $< -o $@
+		@$(CC) -c $(DEBUGGING) $(CFLAGS) $(LFLAGS) $< -o $@
 #		$(CC) -c $(CFLAGS) $(DEBUGGING) $(LFLAGS) $< -o $@ --Este es el qe hay que poner.
 #		$(CC) -c $(CFLAGS) $(DEBUGGING) $(LFLAGS) $< -o $@ -pthread
 

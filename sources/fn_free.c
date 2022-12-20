@@ -6,45 +6,22 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:24:56 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/12 13:19:45 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:47:03 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_free_list(t_list *list)
+void	ft_free_envel(void *content)
 {
-	if (list)
-	{
-		ft_free_list(list->next);
-		free(list);
-	}
-}
+	t_envel	*envel;
 
-void	ft_free_enve(t_envel *envlist)
-{
-	if (envlist)
-	{
-		envlist->name = NULL;
-		envlist->value = NULL;
-	}
-}
-
-void	ft_free_exe(t_exe *execommands)
-{
-	if (execommands)
-	{
-		execommands->cmd = NULL;
-		ft_free_array(execommands->args);
-	}
-}
-
-void	ft_lstdelone(t_list *commands, void (*del)(void *))
-{
-	free(((t_token *)commands->content)->word);
-	del(commands->content);
-	free(commands);
-	commands = NULL;
+	if (!content)
+		return ;
+	envel = content;
+	free(envel->name);
+	free(envel->value);
+	free(envel);
 }
 
 void	ft_tokenclear(t_list **commands, void (*del)(void *))
@@ -62,11 +39,16 @@ void	ft_tokenclear(t_list **commands, void (*del)(void *))
 	}
 }
 
-void	ft_free_tokens(t_token *tokens)
+void 	ft_free_token(void *content)
 {
-	if (!tokens->extvar)
+	t_token	*token;
+
+	if (!content)
 		return ;
-	ft_free_array(&tokens->extvar);
+	token = content;
+	free(token->word);
+	free(token->extvar);
+	free(token);
 }
 
 void	ft_freemain(t_main *main)
@@ -75,9 +57,9 @@ void	ft_freemain(t_main *main)
 	free(main->home);
 	free(main->temp_pwd);
 	free(main->temp_oldpwd);
-	ft_free_list(main->commands);
-	ft_free_tokens(main->tokens);
-	ft_free_list(main->envl);
-	ft_free_enve(main->envlist);
+	ft_free_token(main->tokens);
+	ft_lstclear(&main->envl, ft_free_envel);
+	free(main->envlist);
+	free(main->exe_commands);
 	free(main);
 }

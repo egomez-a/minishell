@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 12:19:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/12 14:23:33 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:25:43 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	chk_quote(t_main *main, int cnt)
 		}
 		new_token = fn_token_new(word, flag, 0, 0);
 		ft_lstadd_back(&main->commands, ft_lstnew(new_token));
-		free (word);
 	}
+	free (word);
 	return (cnt);
 }

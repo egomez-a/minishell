@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:13:35 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/10/28 13:32:53 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:06:11 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int 	fn_cd(t_main *main)
     int     i;
 
     // tengo que sustituir todo esto por los argumentos que vengan de la tokenización 
-    test_echo = "cD ..";
+    test_echo = "CD /sources";
 	arguments = ft_split(test_echo, ' ');
     i = 0;
     while (arguments[i])
@@ -58,6 +58,7 @@ int 	fn_cd(t_main *main)
         i++;
     }
     key_envvariables(main);
+    cd_return = 0;
     // caso cd 'a secas', sin argumentos
     if (!arguments[1] || !ft_strcmp(arguments[1], "~"))
     {

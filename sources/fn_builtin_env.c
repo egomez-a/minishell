@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:15:56 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/01 10:34:21 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:03:00 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**paths_with_separator(char *paths)
 		i++;
 	}
 	matrixwithseparator[i + 1] = NULL;
-	free(paths);
+	//free(paths);
 	ft_free_array(matrixpaths);
 	return (matrixwithseparator);
 }
@@ -60,11 +60,9 @@ char	**paths_with_separator(char *paths)
 char	**paths_from_env(t_main *main)
 {
 	char	*paths;
-	char	*aux;
 	t_list	*list;
 	char	**matrix;
-	
-	
+
 	list = main->envl;
 	while (list != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/12 18:24:21 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:06:05 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,11 +172,11 @@ int		chk_dollar_ext(t_main *main);
 */
 
 void	ft_free_list(t_list *list);
-void	ft_free_enve(t_envel *envlist);
+void	ft_free_envel(void *content);
 void	fn_free_exe(t_exe *exe_commands);
 void	fn_lstdelone(t_list *commands, void (*del)(void *));
 void	ft_tokenclear(t_list **commands, void (*del)(void *));
-void	fn_free_tokens(t_token *tokens);
+void 	ft_free_token(void *content);
 void	ft_freemain(t_main *main);
 
 /*
@@ -197,9 +197,11 @@ int 	fn_cd(t_main *main);
 ** Built-in (fn_builtin_echo.c)
 */
 
-static int	number_of_arguments(char **args);
+// static int	number_of_arguments(char **args);
 void		print_echo(char **args, int n_flag);
 int			flag_treatment(char **args);
+int			flag_n_check(char *args);
+char 		**tokens_into_matrix(t_main *main);
 int			fn_echo(t_main *main);
 
 /*

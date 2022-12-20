@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/08 11:39:06 by egomez-a          #+#    #+#              #
-#    Updated: 2022/12/12 11:19:16 by egomez-a         ###   ########.fr        #
+#    Updated: 2022/12/20 14:50:28 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = 	ft_atoi.c \
 		ft_lstmap.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
+		ft_matrixdup.c \
 		ft_matrixlen.c \
 		ft_memccpy.c \
 		ft_memchr.c \
