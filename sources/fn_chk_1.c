@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 12:19:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/20 12:25:43 by egomez-a         ###   ########.fr       */
+/*   Updated: 2022/12/23 13:55:32 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //TODO: Controlar el $ para expandir variables.
 
-int	chk_here(t_main *main, int cnt)
+int	chk_here(t_main *main, int cnt) 
 {
 	t_token		*new_token;
 
