@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:51:25 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/20 12:46:31 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/18 23:51:07 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 	main = NULL;
 	main = fn_init_main(main, argc, argv, env);
 	ft_env_list(main, env);
-	while (1)
+	while (main->ex == 0)
 	{
 		main->line = check_prompt(argc, argv);
 		if (main->line[0] != '\0')
@@ -97,11 +97,12 @@ int	main(int argc, char **argv, char **env)
 			else
 				check_first_token(main);
 		}
-		free(main->line);
+		if (main->ex != 1)
+			free(main->line);
 		ft_lstclear(&main->commands, ft_free_token);
 		ft_free_array(main->exe_commands->args);
 	}
 	ft_freemain(main);
 	system("leaks -q minishell");
-	return (0);
+	return (main->ret);
 }

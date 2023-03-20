@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:46:35 by juasanto          #+#    #+#              #
-#    Updated: 2022/12/20 10:59:39 by egomez-a         ###   ########.fr        #
+#    Updated: 2023/03/20 20:56:28 by alfgarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRCS		=	minishell.c \
 				fn_builtin_echo.c \
 				fn_builtin_env.c \
 				fn_builtin_export.c \
+				fn_builtin_unset.c \
+				fn_builtin_exit.c \
 				fn_builtin_cd.c 
 
 OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.c=.o))

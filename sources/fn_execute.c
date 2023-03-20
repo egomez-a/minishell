@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:01:44 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/12 13:20:05 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:59:02 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,18 @@ int	check_builtins(t_main *main)
 
 void	fn_check_word(t_list *list, t_main *main)
 {
-	int	ret;
-
 	if (ft_strcmp((((t_token *)list->content)->word), "pwd") == 0)
-		ret = fn_pwd();
+		main->ret = fn_pwd();
 	else if (ft_strcmp((((t_token *)list->content)->word), "env") == 0)
-		ret = fn_env(main);
+		main->ret = fn_env(main);
 	else if (ft_strcmp((((t_token *)list->content)->word), "export") == 0)
-		ret = fn_export(main);
+		main->ret = fn_export(main);
 	else if (ft_strcmp((((t_token *)list->content)->word), "cd") == 0)
-		ret = fn_cd(main);
+		main->ret = fn_cd(main);
 	else if (ft_strcmp((((t_token *)list->content)->word), "echo") == 0)
-		ret = fn_echo(main);
-	// else if (ft_strcmp((((t_token *)list->content)->word), "exit") == 0)
-	// 	ret = fn_exit(main);
-	// else if (ft_strcmp((((t_token *)list->content)->word), "unset") == 0)
-	// 	ret = fn_unset(main);
+		main->ret = fn_echo(main);
+	else if (ft_strcmp((((t_token *)list->content)->word), "exit") == 0)
+	 	main->ret = fn_exit(main);
+	else if (ft_strcmp((((t_token *)list->content)->word), "unset") == 0)
+		main->ret = fn_unset(main);
 }

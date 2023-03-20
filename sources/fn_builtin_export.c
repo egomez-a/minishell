@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:14:41 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/11/29 12:59:22 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/18 23:18:54 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,11 @@ int    fn_export(t_main *main)
     char    **temp;
     t_list  *list;
     int     num;
-    int     ret;
 
     list = main->envl;
     num = ft_lstsize(list) - 1;
     temp = env_to_matrix(num, list);
-    ret = order_env_matrix(temp, num);
+    main->ret = order_env_matrix(temp, num);
     ft_free_array(temp);
     return (0);
 }

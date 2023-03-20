@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/20 13:06:05 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:56:49 by alfgarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_main
 	int			control;
 	int			ret;
 	t_func		func[5];
+	int			ex;
 }				t_main;
 
 
@@ -217,7 +218,7 @@ int		fn_env(t_main   *main);
 ** Built-in (fn_builtin_exit.c)
 */
 
-int		fn_exit(char **args);
+int		fn_exit(t_main *main);
 
 /*
 ** Built-in (fn_builtin_export.c)
@@ -238,6 +239,6 @@ int		fn_pwd(void);
 ** Built-in (fn_builtin_unset.c)
 */
 
-int		fn_unset(void);
+int		fn_unset(t_main *main);
 
 #endif
