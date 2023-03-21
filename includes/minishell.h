@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/20 20:56:49 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:07:01 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_token
 	int 	type;
 	int		fd;
 	int		quote;
+	int 	listsize;
 }				t_token;
 
 typedef struct s_exe
@@ -106,6 +107,7 @@ typedef struct s_main
 	int			ret;
 	t_func		func[5];
 	int			ex;
+	int 		listsize;
 }				t_main;
 
 

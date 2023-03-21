@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/20 15:21:01 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:15:38 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ char 	**tokens_into_matrix(t_main *main)
 	while (tokens != NULL)
 	{
 		args[i] = ((t_token *)tokens->content)->word;
+		printf("Token %d es %s\n", i, args[i]);
 		i++;
 		tokens = tokens->next;
 	}
+	main->listsize = i;
+	printf("Tamaño de la lista es %d\n", main->listsize);
 	return (args);
 }
 
@@ -63,14 +66,16 @@ int	fn_echo(t_main *main)
 	char	**args;
 	t_list	*tokens;
 	int 	i;
+	int 	j; 
 
 	args = tokens_into_matrix(main);
 	n_flag = 0;
 	i = 0;
+	j = 0;
 	while (args[i])
 	{
 		n_flag = n_flag + flag_n_check(args[i]);
-		printf("Arg %d is %s and n_flag is %d\n", i, args[i], n_flag);
+		// printf("Arg %d is %s and n_flag is %d\n", i, args[i], n_flag);
 		i++;
 	}
 	i = 0;
@@ -81,8 +86,10 @@ int	fn_echo(t_main *main)
 			i++;
 		else if (((t_token *)tokens->content)->type == ARG)
 		{
-			ft_putstr_fd(args[i], 1);
-			write (1, " ", 1);
+			j = i + n_flag;
+			ft_putstr_fd(args[j], 1);
+			if (j < main->listsize - 1)
+				write (1, " ", 1);
 			i++;
 		}
 		else if (((t_token *)tokens->content)->type == DOLLAR)
@@ -90,7 +97,8 @@ int	fn_echo(t_main *main)
 			// ((t_token *)tokens->content)->extvar = checkenvdollar(args[i], main);
 			args[i] = ((t_token *)tokens->content)->extvar;
 			ft_putstr_fd(args[i], 1);
-			if (ft_strcmp(((t_token *)tokens->content)->word, " ") != 0)
+			// if ((ft_strcmp(((t_token *)tokens->content)->word, " ") != 0) || (t_token *)tokens->next != NULL)
+			if (j < main->listsize - 1)
 				write (1, " ", 1);
 			i++;
 		}
