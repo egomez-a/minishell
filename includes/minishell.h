@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/21 13:07:01 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:33:40 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ void		print_echo(char **args, int n_flag);
 int			flag_treatment(char **args);
 int			flag_n_check(char *args);
 char 		**tokens_into_matrix(t_main *main);
-int			fn_echo(t_main *main);
+int			fn_echo(t_main *main, int n_flag);
 
 /*
 ** Built-in (fn_builtin_env.c)

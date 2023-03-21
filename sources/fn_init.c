@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:32:04 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/18 23:28:29 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/03/21 14:54:53 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_main	*fn_init_main(t_main *main, int argc, char **argv, char **env)
 	main->control = 0;    //si las variables de entorno estan borradas pasa a ser 1
 	// main->func[0] = (t_func){60, chk_here1(main, 4)};
 	main->ex = 0;
+	main->listsize = 0;
 	return (main);
 }
 

@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2023/03/21 13:15:38 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:34:07 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,30 @@ char 	**tokens_into_matrix(t_main *main)
 	while (tokens != NULL)
 	{
 		args[i] = ((t_token *)tokens->content)->word;
-		printf("Token %d es %s\n", i, args[i]);
+		// printf("Token %d es %s\n", i, args[i]);
 		i++;
 		tokens = tokens->next;
 	}
 	main->listsize = i;
-	printf("Tamaño de la lista es %d\n", main->listsize);
+	// printf("Tamaño de la lista es %d\n", main->listsize);
 	return (args);
 }
 
-int	fn_echo(t_main *main)
+char *checkenvdollar(char **chainwithdollar, t_main main)
 {
-	int		n_flag;
+	printf("%s\n", chainwithdollar);
+	
+	
+}
+
+int	fn_echo(t_main *main, int n_flag)
+{
 	char	**args;
 	t_list	*tokens;
 	int 	i;
 	int 	j; 
 
 	args = tokens_into_matrix(main);
-	n_flag = 0;
 	i = 0;
 	j = 0;
 	while (args[i])
@@ -94,8 +99,9 @@ int	fn_echo(t_main *main)
 		}
 		else if (((t_token *)tokens->content)->type == DOLLAR)
 		{
-			// ((t_token *)tokens->content)->extvar = checkenvdollar(args[i], main);
+			((t_token *)tokens->content)->extvar = checkenvdollar(args[i], main);
 			args[i] = ((t_token *)tokens->content)->extvar;
+			printf("El token es %s\n", args[i]);
 			ft_putstr_fd(args[i], 1);
 			// if ((ft_strcmp(((t_token *)tokens->content)->word, " ") != 0) || (t_token *)tokens->next != NULL)
 			if (j < main->listsize - 1)
