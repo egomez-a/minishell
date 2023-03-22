@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:33:01 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/22 15:13:38 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:16:10 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	chk_dollar(t_main *main, int cnt)
 		if (main->line[cnt] == DQU || main->line[cnt] == SQU
 			|| (main->line[cnt] >= '0' && main->line[cnt] <= '9'))
 		{
-			printf("QUOOOOOTTTEEEE\n");
 			flag = ARG;
 			cnt++;
 		}
