@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2023/03/22 13:23:55 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:06:12 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,22 @@ int	fn_echo(t_main *main, int n_flag)
 				write (1, " ", 1);
 			i++;
 		}
-		else if (((t_token *)tokens->content)->type == DOLLAR)
+		else if (((t_token *)tokens->content)->type == DOLLAR
+				|| ((t_token *)tokens->content)->type == DOLENC)
 			i++;
 		else if (((t_token *)tokens->content)->type == DOLARG)
 		{
 			check = checkenvdollar(args[i], main);
 			if (check != NULL)
+			{
 				args[i] = check;
-			ft_putstr_fd(args[i], 1);
-			// if ((ft_strcmp(((t_token *)tokens->content)->word, " ") != 0) || (t_token *)tokens->next != NULL)
-			if ((j < main->listsize - 1) && main->dollaralone == 0)
+				ft_putstr_fd(args[i], 1);
+				if ((j < main->listsize - 1) && main->dollaralone == 0)
 				write (1, " ", 1);
-			i++;
+				i++;
+			}
+			else 
+				i++;
 		}
 		tokens = tokens->next;
 	}

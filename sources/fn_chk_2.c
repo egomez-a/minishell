@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:33:01 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/22 11:42:45 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:51:07 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,15 @@ int	chk_dollar(t_main *main, int cnt)
 	add_one[1] = 0;
 	if (main->line[cnt] == DOLLAR)
 	{
-		if (main->line[cnt - 1] && main->line[cnt - 1] == SPACE)
+		if (main->line[cnt - 1])
 		{
-			flag = DOLLAR;
+			if (main->line[cnt - 1] == SPACE)
+				flag = DOLLAR;
+			else
+			{
+				flag = DOLENC;
+				main->dollaralone = 1;
+			}
 			new_token = fn_token_new("$    ", flag, 0, 0);
 			ft_lstadd_back(&main->commands, ft_lstnew(new_token));
 		}
