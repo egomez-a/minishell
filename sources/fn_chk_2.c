@@ -86,7 +86,7 @@ int	chk_dollar(t_main *main, int cnt)
 		if (main->line[cnt - 1])
 		{
 			flag = chk_dollar_flag(main, cnt);
-			new_token = fn_token_new("$    ", flag, 0, 0);
+			new_token = fn_token_new("$", flag, 0, 0);
 			ft_lstadd_back(&main->commands, ft_lstnew(new_token));
 		}
 		cnt++;

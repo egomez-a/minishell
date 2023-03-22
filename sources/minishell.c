@@ -37,16 +37,17 @@ void	check_first_token(t_main *main)
 	while (i < ft_matrixlen(paths_matrix))
 	{
 		first_token_with_path[i] = ft_strjoin(paths_matrix[i], (((t_token *)main->commands->content)->word));
-		// printf("Imprimiento el token %d  %s\n", i, first_token_with_path[i]);
 		i++;
 	}
 	i = 0;
 	while (i < ft_matrixlen(paths_matrix))
 	{
+		printf("---------------\n");
 		if (access(first_token_with_path[i], X_OK)  == 0)
 		{
+		printf("----9999-----------\n");
 			printf ("El path %d %s se puede leer", i, first_token_with_path[i]);
-			if (execve(first_token_with_path[i], argument_list, NULL) != -1)
+			if (execve(first_token_with_path[i], &(((t_token *)main->commands->content)->word), NULL) != -1)
 				printf("1er token %s SI se puede ejecutar\n", first_token_with_path[i]);
 			break;
 		}
