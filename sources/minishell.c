@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:51:25 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:36 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:23:33 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,28 @@ void	check_first_token(t_main *main)
 	paths_matrix = paths_from_env(main);
 	first_token_with_path = ft_calloc(ft_matrixlen(paths_matrix) + 1, sizeof(char *));
 	i = 0;
+	printf("%d\n", ft_matrixlen(paths_matrix));
 	while (i < ft_matrixlen(paths_matrix))
 	{
 		first_token_with_path[i] = ft_strjoin(paths_matrix[i], (((t_token *)main->commands->content)->word));
+		// printf("Imprimiento el token %d  %s\n", i, first_token_with_path[i]);
 		i++;
 	}
 	i = 0;
 	while (i < ft_matrixlen(paths_matrix))
 	{
 		if (access(first_token_with_path[i], X_OK)  == 0)
+		{
+			printf ("El path %d %s se puede leer", i, first_token_with_path[i]);
+			if (execve(first_token_with_path[i], argument_list, NULL) != -1)
+				printf("1er token %s SI se puede ejecutar\n", first_token_with_path[i]);
 			break;
+		}
 		i++;
 	}
-	printf ("El path %d %s se puede leer", i, first_token_with_path[i]);
-	if (execve(first_token_with_path[i], argument_list, NULL) != -1)
-		printf("1er token %s SI se puede ejecutar\n", first_token_with_path[i]);
-	free(argument_list);
 	free(first_token_with_path);
 	free(paths_matrix);
+	free(argument_list);
 }
 
 void	export_token(t_main *main)
@@ -76,7 +80,7 @@ int	main(int argc, char **argv, char **env)
 	main = NULL;
 	main = fn_init_main(main, argc, argv, env);
 	ft_env_list(main, env);
-	while (main->ex == 0)
+	while (main->ex == 0)   // esto me da problemas ... tenemos que revisarlo
 	{
 		main->line = check_prompt(argc, argv);
 		if (main->line[0] != '\0')
@@ -103,6 +107,6 @@ int	main(int argc, char **argv, char **env)
 		ft_free_array(main->exe_commands->args);
 	}
 	ft_freemain(main);
-	// system("leaks -q minishell");
+	system("leaks -q minishell");
 	return (main->ret);
 }

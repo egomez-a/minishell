@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:33:01 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/22 15:16:10 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:57:17 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ int	chk_dollar_alone(t_main *main, int cnt)
 	return (cnt);
 }
 
+int chk_dollar_flag(t_main *main, int cnt)
+{
+	int flag;
+	
+	if (main->line[cnt - 1] == SPACE)
+		flag = DOLLAR;
+	else
+	{
+		main->dollaralone = 1;
+		flag = DOLENC;
+	}
+	return (flag);
+}
+
 int	chk_dollar(t_main *main, int cnt)
 {
 	t_token		*new_token;
@@ -71,13 +85,7 @@ int	chk_dollar(t_main *main, int cnt)
 	{
 		if (main->line[cnt - 1])
 		{
-			if (main->line[cnt - 1] == SPACE)
-				flag = DOLLAR;
-			else
-			{
-				main->dollaralone = 1;
-				flag = DOLENC;
-			}
+			flag = chk_dollar_flag(main, cnt);
 			new_token = fn_token_new("$    ", flag, 0, 0);
 			ft_lstadd_back(&main->commands, ft_lstnew(new_token));
 		}
