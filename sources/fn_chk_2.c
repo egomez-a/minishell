@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:33:01 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/22 13:51:07 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:13:38 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	chk_dollar(t_main *main, int cnt)
 	char		add_one[2];
 	int 		flag;
 
-	flag = DOLENC;
 	word = ft_strdup("");
 	add_one[1] = 0;
 	if (main->line[cnt] == DOLLAR)
@@ -76,8 +75,8 @@ int	chk_dollar(t_main *main, int cnt)
 				flag = DOLLAR;
 			else
 			{
-				flag = DOLENC;
 				main->dollaralone = 1;
+				flag = DOLENC;
 			}
 			new_token = fn_token_new("$    ", flag, 0, 0);
 			ft_lstadd_back(&main->commands, ft_lstnew(new_token));
@@ -86,8 +85,9 @@ int	chk_dollar(t_main *main, int cnt)
 		if (main->line[cnt] == DQU || main->line[cnt] == SQU
 			|| (main->line[cnt] >= '0' && main->line[cnt] <= '9'))
 		{
-			cnt++;
+			printf("QUOOOOOTTTEEEE\n");
 			flag = ARG;
+			cnt++;
 		}
 		if (chk_dollar_alone(main, cnt) == 0)
 			return (cnt);
@@ -100,7 +100,8 @@ int	chk_dollar(t_main *main, int cnt)
 		{
 			add_one[0] = main->line[cnt];
 			word = ft_strjoin_clean(word, add_one, 1);
-			flag = DOLARG;
+			if (flag != ARG)
+				flag = DOLARG;
 			cnt++;
 			if (main->line[cnt] == DOLLAR || main->line[cnt] == SPACE
 				|| main->line[cnt] == DQU || main->line[cnt] == SQU

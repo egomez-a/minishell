@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 12:19:58 by juasanto          #+#    #+#             */
-/*   Updated: 2022/12/23 13:55:32 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:02:00 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	chk_quote(t_main *main, int cnt)
 		{
 			if (main->line[cnt - 1] == DQU && main->line[cnt] == DOLLAR)
 			{	
-				flag = DOLLAR;
+				flag = DOLARG;
 				cnt++;
 			}
 			add_one[0] = main->line[cnt];
