@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2023/03/22 11:51:14 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:23:55 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,11 @@ char *checkenvdollar(char *string, t_main *main)
 	char	*dollarextvar;
 
 	dollarextvar = NULL;	
-	printf("%s\n", string);
 	list = main->envl;
 	while (list != NULL && ((t_envel *)list->content)->name != NULL)
 	{
-		if ((((t_envel *)list->content)->name) == string)
-		{
-			printf("%s es variable de entorno\n", (((t_envel *)list->content)->name));
-			dollarextvar = (((t_envel *)list->content)->name);
-		}
+		if (ft_strcmp((((t_envel *)list->content)->name), string) == 0)
+			dollarextvar = (((t_envel *)list->content)->value);
 		list = list->next;
 	}
 	return (dollarextvar);
@@ -87,12 +83,12 @@ int	fn_echo(t_main *main, int n_flag)
 	t_list	*tokens;
 	int 	i;
 	int 	j;
-	char	*chechenvdollar;
+	char	*check;
 
 	args = tokens_into_matrix(main);
 	i = 0;
 	j = 0;
-	chechenvdollar = NULL;
+	check = NULL;
 	while (args[i])
 	{
 		n_flag = n_flag + flag_n_check(args[i]);
@@ -117,11 +113,9 @@ int	fn_echo(t_main *main, int n_flag)
 			i++;
 		else if (((t_token *)tokens->content)->type == DOLARG)
 		{
-			if (checkenvdollar(args[i], main) != NULL)
-			{
-				args[i] = ((t_token *)tokens->content)->extvar;
-				printf("El token es.... %s\n", args[i]);
-			}
+			check = checkenvdollar(args[i], main);
+			if (check != NULL)
+				args[i] = check;
 			ft_putstr_fd(args[i], 1);
 			// if ((ft_strcmp(((t_token *)tokens->content)->word, " ") != 0) || (t_token *)tokens->next != NULL)
 			if ((j < main->listsize - 1) && main->dollaralone == 0)
