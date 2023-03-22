@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:46:35 by juasanto          #+#    #+#              #
-#    Updated: 2023/03/21 15:04:11 by egomez-a         ###   ########.fr        #
+#    Updated: 2023/03/22 13:25:49 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ gitpush: fclean
 		@echo "$(RED)========== GIT_PUSH =========="
 		git add *
 		git commit -m "MiniShell - $(NOW)"
-		git push --set-upstream origin master
+		git push #--set-upstream origin master
 		git status
 		@echo "$(RED)=========== DONE ===========$(RESET)"
 bonus: all
