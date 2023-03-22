@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/21 14:33:40 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:37:56 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define LESS 60
 # define MORE 62
 # define DOLLAR 36
+# define DOLARG 361
 # define DOLENC 366
 # define CMD 300
 # define ARG 288
@@ -108,6 +109,7 @@ typedef struct s_main
 	t_func		func[5];
 	int			ex;
 	int 		listsize;
+	int			dollaralone;
 }				t_main;
 
 

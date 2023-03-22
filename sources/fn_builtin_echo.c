@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:47:38 by egomez-a          #+#    #+#             */
-/*   Updated: 2023/03/21 15:34:07 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:41:14 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,25 @@ char 	**tokens_into_matrix(t_main *main)
 	return (args);
 }
 
-char *checkenvdollar(char **chainwithdollar, t_main main)
+// chequeo si el argumento que viene después de $ es una variable de entorno. 
+char *checkenvdollar(char *string, t_main *main)
 {
-	printf("%s\n", chainwithdollar);
-	
-	
+	t_list	*list;
+	char	*dollarextvar;
+
+	dollarextvar = NULL;	
+	printf("%s\n", string);
+	list = main->envl;
+	while (list != NULL && ((t_envel *)list->content)->name != NULL)
+	{
+		if ((((t_envel *)list->content)->name) == string)
+		{
+			printf("%s es variable de entorno\n", (((t_envel *)list->content)->name));
+			dollarextvar = (((t_envel *)list->content)->name);
+		}
+		list = list->next;
+	}
+	return (dollarextvar);
 }
 
 int	fn_echo(t_main *main, int n_flag)
@@ -72,11 +86,13 @@ int	fn_echo(t_main *main, int n_flag)
 	char	**args;
 	t_list	*tokens;
 	int 	i;
-	int 	j; 
+	int 	j;
+	char	*chechenvdollar;
 
 	args = tokens_into_matrix(main);
 	i = 0;
 	j = 0;
+	chechenvdollar = NULL;
 	while (args[i])
 	{
 		n_flag = n_flag + flag_n_check(args[i]);
@@ -93,18 +109,22 @@ int	fn_echo(t_main *main, int n_flag)
 		{
 			j = i + n_flag;
 			ft_putstr_fd(args[j], 1);
-			if (j < main->listsize - 1)
+			if ((j < main->listsize - 1) && main->dollaralone == 0)
 				write (1, " ", 1);
 			i++;
 		}
 		else if (((t_token *)tokens->content)->type == DOLLAR)
+			tokens = tokens->next;
+		else if (((t_token *)tokens->content)->type == DOLARG)
 		{
-			((t_token *)tokens->content)->extvar = checkenvdollar(args[i], main);
-			args[i] = ((t_token *)tokens->content)->extvar;
-			printf("El token es %s\n", args[i]);
+			if (checkenvdollar(args[i], main) != NULL)
+			{
+				args[i] = ((t_token *)tokens->content)->extvar;
+				printf("El token es.... %s\n", args[i]);
+			}
 			ft_putstr_fd(args[i], 1);
 			// if ((ft_strcmp(((t_token *)tokens->content)->word, " ") != 0) || (t_token *)tokens->next != NULL)
-			if (j < main->listsize - 1)
+			if ((j < main->listsize - 1) && main->dollaralone == 0)
 				write (1, " ", 1);
 			i++;
 		}

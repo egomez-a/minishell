@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 09:33:01 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/21 15:36:24 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/22 11:42:45 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	chk_all(t_main *main, int cnt)
 		main->line[cnt] == SQU || main->line[cnt] == DOLLAR);
 }
 
+// esta función evalua echo $? debe retornar valor de retorno.
 int	chk_dollar_question(t_main *main, int cnt)
 {
 	t_token		*new_token;
@@ -35,6 +36,7 @@ int	chk_dollar_question(t_main *main, int cnt)
 	return (cnt);
 }
 
+// esta función evalua si el $ aparece sólo. echo $. 
 int	chk_dollar_alone(t_main *main, int cnt)
 {
 	t_token		*new_token;
@@ -45,6 +47,7 @@ int	chk_dollar_alone(t_main *main, int cnt)
 	add_one[1] = 0;
 	if (main->line[cnt] == '\0' || main->line[cnt] == SPACE)
 	{
+		main->dollaralone = 1;
 		add_one[0] = main->line[cnt - 1];
 		word = ft_strjoin_clean(word, add_one, 1);
 		new_token = fn_token_new(word, ARG, 0, 0);
@@ -70,7 +73,7 @@ int	chk_dollar(t_main *main, int cnt)
 		if (main->line[cnt - 1] && main->line[cnt - 1] == SPACE)
 		{
 			flag = DOLLAR;
-			new_token = fn_token_new("$e", flag, 0, 0);
+			new_token = fn_token_new("$    ", flag, 0, 0);
 			ft_lstadd_back(&main->commands, ft_lstnew(new_token));
 		}
 		cnt++;
@@ -91,6 +94,7 @@ int	chk_dollar(t_main *main, int cnt)
 		{
 			add_one[0] = main->line[cnt];
 			word = ft_strjoin_clean(word, add_one, 1);
+			flag = DOLARG;
 			cnt++;
 			if (main->line[cnt] == DOLLAR || main->line[cnt] == SPACE
 				|| main->line[cnt] == DQU || main->line[cnt] == SQU
