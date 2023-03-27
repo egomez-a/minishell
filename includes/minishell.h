@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/27 12:09:54 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:39:06 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,9 @@ void    fn_check_word(t_list *list, t_main *main);
 */
 
 char    *update_oldpwd(t_main *main);
+void    update_key_envvariables(t_main *main);
 void    key_envvariables(t_main *main);
+int     ft_cd_alone(t_main *main);
 int 	fn_cd(t_main *main);
 
 /*

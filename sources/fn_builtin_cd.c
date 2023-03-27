@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:13:35 by egomez-a          #+#    #+#             */
-/*   Updated: 2023/03/27 12:26:51 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:20:39 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,45 @@ void    key_envvariables(t_main *main)
 // caso cd 'a secas', sin argumentos
 int     ft_cd_alone(t_main *main)
 {
-	printf("Status de las variables \n");
-	printf("main oldpwd actual %s\n", main->temp_oldpwd);
-	printf("main temp_pwd actual %s\n", main->temp_pwd);
-	main->temp_oldpwd = main->temp_pwd;
-	main->temp_pwd = main->home;
+	if (!main->home)
+	{
+		write(2, "minishell: cd: HOME not set\n", ft_strlen("minishell: cd: HOME not set\n"));
+		return (1);
+	}
+	main->temp_oldpwd = ft_strdup(main->temp_pwd);
+	free(main->temp_pwd);
+	main->temp_pwd = ft_strdup(main->home);
 	update_key_envvariables(main);
+	chdir(main->temp_pwd);
 	printf("Si pongo 'cd' Directorio nuevo es %s, oldpwd es %s\n", main->temp_pwd,  main->temp_oldpwd);
+	return (0);
+}
+
+// caso 'cd -' debe ir a OLDPWD
+int		ft_cd_guion(t_main *main)
+{
+	char *tmp;
+	
+	tmp = NULL;
+	if (!main->temp_oldpwd)
+	{
+		write(2, "minishell: cd: OLDPWD not set\n", ft_strlen("minishell: cd: OLDPWD not set\n"));
+		return (1);
+	}
+	tmp = ft_strdup(main->temp_pwd);
+	free(main->temp_pwd);
+	main->temp_pwd = ft_strdup(main->temp_oldpwd);
+	main->temp_oldpwd = ft_strdup(tmp);
+	free(tmp);
+	chdir(main->temp_pwd);
+	update_key_envvariables(main);
+	printf("Si pongo 'cd -' Directorio nuevo es %s \t\t oldpwd es %s\n", main->temp_pwd,  main->temp_oldpwd);
 	return (0);
 }
 
 int 	fn_cd(t_main *main)
 {
 	char	**arguments;
-	int     cd_return;
 	int     i;
 
 	arguments = ft_split(main->line, ' '); // tengo que ver el caso donde haya varios espacios seguidos
@@ -84,29 +109,20 @@ int 	fn_cd(t_main *main)
 		i++;
 	}
 	key_envvariables(main);
-	cd_return = 0;
-	// caso cd 'a secas', sin argumentos
 	if (!arguments[1] || !ft_strcmp(arguments[1], "~"))
-		cd_return = ft_cd_alone(main);
-	// caso cd -, debe ir al OLDPWD
+		main->ret = ft_cd_alone(main);
 	else if (arguments[1] && !ft_strcmp(arguments[1], "-"))
-	{
-		printf("Analizo cd -\n");
-		cd_return = chdir(main->temp_oldpwd);
-		printf("El nuevo directorio es %s\n", main->temp_oldpwd);
-		main->temp_pwd = update_oldpwd(main);
-		printf("Si pongo 'cd -' Directorio nuevo es %s, oldpwd es %s\n", main->temp_pwd,  main->temp_oldpwd);
-	}
-	//  caso cd 'lo que sea'
+		main->ret = ft_cd_guion(main);
 	else if (arguments[1])
 	{
 		if (!opendir(arguments[1]))
 		{
 			printf("El Argumento %s no existe\n", arguments[1]);
 			ft_free_array(arguments);
+			main->ret = 1;
 			return (1);
 		}
-		cd_return = chdir(arguments[1]);
+		main->ret = chdir(arguments[1]);
 		main->temp_pwd = update_oldpwd(main);
 		printf("Si pongo 'cd ..' Directorio nuevo es %s, oldpwd es %s\n", main->temp_pwd,  main->temp_oldpwd);
 	}
