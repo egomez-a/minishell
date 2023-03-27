@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:13:35 by egomez-a          #+#    #+#             */
-/*   Updated: 2023/03/27 13:20:39 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:59:44 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int     ft_cd_alone(t_main *main)
 	main->temp_oldpwd = ft_strdup(main->temp_pwd);
 	free(main->temp_pwd);
 	main->temp_pwd = ft_strdup(main->home);
-	update_key_envvariables(main);
 	chdir(main->temp_pwd);
 	printf("Si pongo 'cd' Directorio nuevo es %s, oldpwd es %s\n", main->temp_pwd,  main->temp_oldpwd);
 	return (0);
@@ -91,14 +90,59 @@ int		ft_cd_guion(t_main *main)
 	main->temp_oldpwd = ft_strdup(tmp);
 	free(tmp);
 	chdir(main->temp_pwd);
-	update_key_envvariables(main);
 	printf("Si pongo 'cd -' Directorio nuevo es %s \t\t oldpwd es %s\n", main->temp_pwd,  main->temp_oldpwd);
 	return (0);
+}
+
+// caso cd path 
+int		ft_cd_path(t_main *main, char *route)
+{
+	char tmp[1024];
+	
+	if (open(route, O_RDONLY) < 0)
+	{
+		write(2, "minishell: cd: ", ft_strlen("minishell: cd: "));
+		write(2, route, ft_strlen(route));
+		write(2, ": No such file or directory\n", ft_strlen(": No such file or directory\n"));
+		return (1);
+	}
+	main->temp_oldpwd = ft_strdup(main->temp_pwd);
+	chdir(route);
+	getcwd(tmp, 1024);
+	free(main->temp_pwd);
+	main->temp_pwd =ft_strdup(tmp);
+	return (0);
+}
+
+int	ft_check_cd(char *directory)
+{
+	DIR		*dire;
+
+	dire = opendir(directory);
+	if (!dire)
+	{
+		perror ("minishell");
+		return (1);
+	}
+	closedir(dire);
+	return (0);
+}
+
+char	*ft_path_suffix(char *path, char *suffix)
+{
+	char *s1;
+	char *s2;
+
+	s1 = ft_strjoin(path, "/");
+	s2 = ft_strjoin(s1, suffix);
+	free(s1);
+	return(s2);
 }
 
 int 	fn_cd(t_main *main)
 {
 	char	**arguments;
+	char 	*route;
 	int     i;
 
 	arguments = ft_split(main->line, ' '); // tengo que ver el caso donde haya varios espacios seguidos
@@ -115,18 +159,20 @@ int 	fn_cd(t_main *main)
 		main->ret = ft_cd_guion(main);
 	else if (arguments[1])
 	{
-		if (!opendir(arguments[1]))
+		if (*arguments[1] == '/')
+			route = ft_strdup(arguments[1]);
+		else
+			route = ft_path_suffix(main->temp_pwd, arguments[1]);
+		if (ft_check_cd(route) == 1)
 		{
-			printf("El Argumento %s no existe\n", arguments[1]);
-			ft_free_array(arguments);
-			main->ret = 1;
+			free(main->temp_pwd);
 			return (1);
 		}
-		main->ret = chdir(arguments[1]);
-		main->temp_pwd = update_oldpwd(main);
-		printf("Si pongo 'cd ..' Directorio nuevo es %s, oldpwd es %s\n", main->temp_pwd,  main->temp_oldpwd);
+		main->ret = ft_cd_path(main, route);
+		free(route);
 	}
+	update_key_envvariables(main);
 	ft_free_array(arguments);
-	printf("la variable cd_return es %d\n", cd_return);
-	return (cd_return);
+	printf("la variable cd_return es %d\n", main->ret);
+	return (main->ret);
 }

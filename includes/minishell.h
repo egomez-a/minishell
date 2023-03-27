@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/27 12:39:06 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:39:54 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@
 */
 # include <stdio.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <sys/wait.h>
 # include <curses.h>
 # include <term.h>
+# include <termios.h>
+# include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>

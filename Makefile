@@ -6,7 +6,7 @@
 #    By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:46:35 by juasanto          #+#    #+#              #
-#    Updated: 2023/03/22 15:39:08 by egomez-a         ###   ########.fr        #
+#    Updated: 2023/03/27 13:55:08 by egomez-a         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ READLINE_LIB_DIR_FLAG := -L$(shell brew --prefix readline)/lib
 READLINE_INC_DIR_FLAG := -I$(shell brew --prefix readline)/include
 
 LFLAGS = -I includes/
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 LDFLAGS = -lncurses -lreadline $(READLINE_LIB_DIR_FLAG) 
 CPPFLAGS = $(READLINE_INC_DIR_FLAG) 
 # LDFLAGS = -lncurses -lreadline $(RLINE_FLG_E42) 
