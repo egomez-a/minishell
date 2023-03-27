@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 13:24:56 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/18 23:48:15 by alfgarci         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:21:28 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_freemain(t_main *main)
 	free(main->home);
 	free(main->temp_pwd);
 	free(main->temp_oldpwd);
+	free(main->env_path);
 	ft_free_token(main->tokens);
 	ft_lstclear(&main->envl, ft_free_envel);
 	free(main->envlist);

@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:53:58 by juasanto          #+#    #+#             */
-/*   Updated: 2023/03/22 11:37:56 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:12:41 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_main
 	char		*home;
 	char		*temp_pwd;
 	char		*temp_oldpwd;
+	char		*env_path;
 	int			lenght_line;
 	t_pip		pid;
 	t_list		*commands;

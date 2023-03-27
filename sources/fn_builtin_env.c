@@ -6,7 +6,7 @@
 /*   By: egomez-a <egomez-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 11:15:56 by egomez-a          #+#    #+#             */
-/*   Updated: 2022/12/20 11:03:00 by egomez-a         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:44:40 by egomez-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,11 @@
 
 void	print_envlist(t_list *list)
 {
-	int i;
-
-	i = 1;	
 	printf("Numero elementos es %d\n", ft_lstsize(list));
 	while (list != NULL)
 	{
-		printf("%d Nombre: %s\t", i, ((t_envel *)list->content)->name);
+		printf("Nombre: %s\t", ((t_envel *)list->content)->name);
 		printf("Valor :  %s\n", ((t_envel *)list->content)->value);
-		i++;
 		list = list->next;
 	}
 }
@@ -71,7 +67,7 @@ char	**paths_from_env(t_main *main)
 		list = list->next;
 	}
 	matrix = paths_with_separator(paths);
-	return (matrix);
+ 	return (matrix);
 }
 
 int		fn_env(t_main   *main)
